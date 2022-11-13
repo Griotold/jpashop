@@ -7,6 +7,7 @@ import lombok.Setter;
 import javax.persistence.*;
 
 @Entity
+@Table(name = "order_item") // 안해줘도 알아서 스네이크로 만들어주긴 함
 @Getter @Setter
 public class OrderItem {
 
