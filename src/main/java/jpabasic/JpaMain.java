@@ -17,14 +17,15 @@ public class JpaMain {
 
         tx.begin();
 
-        // JPQL
+        // 변경 감지
         try{
-            List<MemberBasic> resultList = em.createQuery("SELECT m FROM MemberBasic as m", MemberBasic.class)
-                    .getResultList();
-            for (MemberBasic memberBasic : resultList) {
-                System.out.println("memberBasic.getName() = " + memberBasic.getName());
-            }
-            tx.commit();
+            
+            MemberBasic findedMember = em.find(MemberBasic.class, 4L); // mbD
+            findedMember.setName("mbDD"); // mbDD로 변경
+            
+            // em.persist(findedMember); 하면 안됨
+
+            tx.commit(); // 실제 쿼리가 날라가서 DB에 업데이트
         } catch(Exception e){
             tx.rollback();
         } finally{
