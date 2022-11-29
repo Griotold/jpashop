@@ -17,18 +17,16 @@ public class JpaMain {
 
         tx.begin();
 
-        // 준영속 상태 detached
+        // 객체와 테이블 매핑
         try{
-            MemberBasic findedMB = em.find(MemberBasic.class, 6L);
-            findedMB.setName("mbFF");
-                
-            //em.detach(findedMB); // 특정 엔티티를 준영속 상태로 만들기
-            em.clear(); // 영속성 컨텍스트 밀어버리기
+            MemberBasic mb = new MemberBasic(1L, "mbA");
+            em.persist(mb);
+            // @Table(name="MBR")이므로 MBR 테이블로 쿼리 날라감
             tx.commit();
         } catch(Exception e){
             tx.rollback();
         } finally{
-            em.close(); // 종료되었으니 영속성 컨텍스트도 같이 종료
+            em.close();
         }
         emf.close();
 

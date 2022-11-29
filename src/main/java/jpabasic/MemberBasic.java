@@ -7,8 +7,10 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.Table;
 
 @Entity
+@Table(name = "MBR")
 @Getter @Setter
 @NoArgsConstructor // JPA는 기본 생성자를 요구한다.
 public class MemberBasic {
@@ -16,6 +18,7 @@ public class MemberBasic {
     @Id
     private Long id;
     private String name;
+
     public MemberBasic(long id, String name) {
         this.id = id;
         this.name = name;
