@@ -17,11 +17,9 @@ public class JpaMain {
 
         tx.begin();
 
-        // 객체와 테이블 매핑
+        // 데이터베이스 스키마 자동 생성
         try{
-            MemberBasic mb = new MemberBasic(1L, "mbA");
-            em.persist(mb);
-            // @Table(name="MBR")이므로 MBR 테이블로 쿼리 날라감
+
             tx.commit();
         } catch(Exception e){
             tx.rollback();
