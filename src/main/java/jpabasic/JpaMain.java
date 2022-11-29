@@ -17,19 +17,18 @@ public class JpaMain {
 
         tx.begin();
 
-        // 플러쉬
+        // 준영속 상태 detached
         try{
-            MemberBasic mb = new MemberBasic(6L, "mbF");
-            em.persist(mb);
-            // 커밋전에 sql이 날라가는 걸 보고 싶으면 직접 호출
-            em.flush();
-            System.out.println("============");
-
-            tx.commit(); // 플러시 자동 호출인데, 위에서 호출해줬으므로 이때는 호출 안함.
+            MemberBasic findedMB = em.find(MemberBasic.class, 6L);
+            findedMB.setName("mbFF");
+                
+            //em.detach(findedMB); // 특정 엔티티를 준영속 상태로 만들기
+            em.clear(); // 영속성 컨텍스트 밀어버리기
+            tx.commit();
         } catch(Exception e){
             tx.rollback();
         } finally{
-            em.close();
+            em.close(); // 종료되었으니 영속성 컨텍스트도 같이 종료
         }
         emf.close();
 
