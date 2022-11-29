@@ -17,5 +17,7 @@ public class MemberBasic {
     private Long id;
     private String name;
     public MemberBasic(long id, String name) {
+        this.id = id;
+        this.name = name;
     }
 }

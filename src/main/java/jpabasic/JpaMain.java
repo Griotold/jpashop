@@ -17,15 +17,15 @@ public class JpaMain {
 
         tx.begin();
 
-        // 변경 감지
+        // 플러쉬
         try{
-            
-            MemberBasic findedMember = em.find(MemberBasic.class, 4L); // mbD
-            findedMember.setName("mbDD"); // mbDD로 변경
-            
-            // em.persist(findedMember); 하면 안됨
+            MemberBasic mb = new MemberBasic(6L, "mbF");
+            em.persist(mb);
+            // 커밋전에 sql이 날라가는 걸 보고 싶으면 직접 호출
+            em.flush();
+            System.out.println("============");
 
-            tx.commit(); // 실제 쿼리가 날라가서 DB에 업데이트
+            tx.commit(); // 플러시 자동 호출인데, 위에서 호출해줬으므로 이때는 호출 안함.
         } catch(Exception e){
             tx.rollback();
         } finally{
