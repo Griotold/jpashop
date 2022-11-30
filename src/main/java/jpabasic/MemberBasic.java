@@ -17,6 +17,7 @@ import java.util.Date;
 public class MemberBasic {
 
     @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(name = "name", nullable = false)

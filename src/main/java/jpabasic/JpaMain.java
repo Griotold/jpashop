@@ -17,8 +17,14 @@ public class JpaMain {
 
         tx.begin();
 
-        // 데이터베이스 스키마 자동 생성
+        // IDENTITY 전략은 persist()때 바로 insert 쿼리를 날린다.
         try{
+            MemberBasic mb = new MemberBasic();
+            mb.setAge(18);
+            mb.setUsername("b");
+            System.out.println("===========");
+            em.persist(mb); // 이 때 insert 쿼리 날라감
+            System.out.println("=============");
 
             tx.commit();
         } catch(Exception e){
